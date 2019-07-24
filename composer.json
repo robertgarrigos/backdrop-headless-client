@@ -1,0 +1,55 @@
+{
+    "name": "robertgarrigos/backdrop-headless-client",
+    "description": "Laravel 5 REST API client for a backdrop cms site with the headless module.",
+    "keywords": [
+        "robertgarrigos",
+        "backdrop-headless-client"
+    ],
+    "homepage": "https://github.com/robertgarrigos/backdrop-headless-client",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Robert Garrigos",
+            "email": "robert@garrigos.cat",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.1",
+        "laravel/framework": "5.8.*",
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "require-dev": {
+        "orchestra/testbench": "3.8.*",
+        "phpunit/phpunit": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Robertgarrigos\\BackdropHeadlessClient\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Robertgarrigos\\BackdropHeadlessClient\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Robertgarrigos\\BackdropHeadlessClient\\BackdropHeadlessClientServiceProvider"
+            ],
+            "aliases": {
+                "Backdrop": "Robertgarrigos\\BackdropHeadlessClient\\Facades\\Backdrop"
+            }
+        }
+    }
+}
