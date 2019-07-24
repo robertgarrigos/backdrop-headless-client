@@ -7,7 +7,7 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/robertgarrigos/backdrop-headless-client.svg?style=flat-square)](https://scrutinizer-ci.com/g/robertgarrigos/backdrop-headless-client)
 [![Total Downloads](https://img.shields.io/packagist/dt/robertgarrigos/backdrop-headless-client.svg?style=flat-square)](https://packagist.org/packages/robertgarrigos/backdrop-headless-client)
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
+This is a laravel package which allows you to pull data from a backdrop cms site, configured with the headles module. Thus you can use the backdrop site as a backend and laravel as front end.
 
 ## Installation
 
