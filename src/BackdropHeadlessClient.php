@@ -22,7 +22,6 @@ class BackdropHeadlessClient
      * @param String $view view's machine name
      * @param String $display_id view's display_id
      * @param String $args any additional arguments
-     * @return json
      **/
     public function getView($view, $display_id, $args = null)
     {
@@ -66,7 +65,6 @@ class BackdropHeadlessClient
             $mapped_node = $node;
         }
 
-
         return $mapped_node;
     }
 
@@ -87,9 +85,8 @@ class BackdropHeadlessClient
         if (!$term) {
             abort(404);
         }
+
         return $term;
-
-
     }
 
     /**
@@ -121,6 +118,7 @@ class BackdropHeadlessClient
                 }
             }
         }
+
         return $mapped_node;
     }
 
@@ -144,6 +142,7 @@ class BackdropHeadlessClient
         if (isset($paragraph->code) && $paragraph->code == 404) {
             abort(404);
         }
+
         return $paragraph;
     }
 
