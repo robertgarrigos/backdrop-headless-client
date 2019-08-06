@@ -4,7 +4,7 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/robertgarrigos/backdrop-headless-client.svg?style=flat-square)](https://packagist.org/packages/robertgarrigos/backdrop-headless-client)
 [![Build Status](https://img.shields.io/travis/robertgarrigos/backdrop-headless-client/master.svg?style=flat-square)](https://travis-ci.org/robertgarrigos/backdrop-headless-client)
-[![Quality Score](https://img.shields.io/scrutinizer/g/robertgarrigos/backdrop-headless-client.svg?style=flat-square)](https://scrutinizer-ci.com/g/robertgarrigos/backdrop-headless-client)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/robertgarrigos/backdrop-headless-client/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/robertgarrigos/backdrop-headless-client/?branch=master)
 [![Total Downloads](https://img.shields.io/packagist/dt/robertgarrigos/backdrop-headless-client.svg?style=flat-square)](https://packagist.org/packages/robertgarrigos/backdrop-headless-client)
 
 This is a laravel package which allows you to pull data from a backdrop cms site, configured with the headles module. Thus you can use the backdrop site as a backend and laravel as front end.
