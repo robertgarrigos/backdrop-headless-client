@@ -124,6 +124,27 @@ class BackdropHeadlessClient
         return $mapped_node;
     }
 
-
+    /**
+     * Get a paragraphs item
+     *
+     * @param String $view view's machine name
+     * @param String $display_id view's display_id
+     * @param String $args any additional arguments
+     * @return json
+     **/
+    public function getParagraph($type, $id)
+    {
+        $url = config('backdrop-headless-client.backdrop_api_server') . '/api/v2/paragraphs/' . $type . '/' . $id;
+        try {
+            $response = $this->client->get($url);
+        } catch (RequestException $e) {
+            abort(404);
+        }
+        $paragraph = json_decode($response->getBody()->getContents());
+        if (isset($paragraph->code) && $paragraph->code == 404) {
+            abort(404);
+        }
+        return $paragraph;
+    }
 
 }
