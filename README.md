@@ -1,4 +1,4 @@
-# Laravel 5 REST API client for a backdrop cms site with the headless module
+# Laravel 5 REST API client for a Backdrop cms site with the headless module
 
 **This package is still in a heavy development process**
 
