@@ -128,7 +128,6 @@ class BackdropHeadlessClient
      * @param String $view view's machine name
      * @param String $display_id view's display_id
      * @param String $args any additional arguments
-     * @return json
      **/
     public function getParagraph($type, $id)
     {
