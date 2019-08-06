@@ -42,6 +42,10 @@ $term = Backdrop::getTerm($vocabulary, $id);
 /* Views (v2): /api/v2/views/{view_name}/{display_id}{arguments} */
 
 $view = Backdrop::getView($view, $display_id, $args);
+
+/* Paragraphs (v2): /api/v2/paragraphs/{type}/{id} */
+
+$paragraph = Backdrop::getParagraph($type, $id);
 ```
 
 Read my [blog post](https://www.garrigos.cat/blog/how-to-set-a-backdrop-cms-as-backend-and-a-laravel-as-frontend) about this package for a deeper understanding of how it works and how to use it.
