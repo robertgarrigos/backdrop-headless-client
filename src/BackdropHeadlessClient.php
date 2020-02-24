@@ -60,8 +60,7 @@ class BackdropHeadlessClient
         $node = json_decode($response->getBody()->getContents());
         if (null != config('backdrop-headless-client.node_types.' . $type)) {
             $mapped_node = $this->mapToNode($type, $node);
-        }
-        else {
+        } else {
             $mapped_node = $node;
         }
 
@@ -110,7 +109,7 @@ class BackdropHeadlessClient
                     $a = data_get($node, implode('.', $value['properties']));
                     if (is_array($a)) {
                         foreach ($a as $k => $v) {
-                            $a2 = array_merge($value['properties'],array($k),$value['value']);
+                            $a2 = array_merge($value['properties'], array($k), $value['value']);
                             $mapped_node->$field[] = data_get($node, $a2);
                         }
                     }

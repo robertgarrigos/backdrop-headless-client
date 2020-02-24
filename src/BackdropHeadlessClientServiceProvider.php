@@ -29,7 +29,7 @@ class BackdropHeadlessClientServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/../config/config.php' => config_path('backdrop-headless-client.php'),
+                __DIR__ . '/../config/config.php' => config_path('backdrop-headless-client.php'),
             ], 'backdrop-config');
 
             // Publishing the views.
@@ -60,11 +60,11 @@ class BackdropHeadlessClientServiceProvider extends ServiceProvider
 
 
         // Register the main class to use with the facade
-        $this->app->singleton('backdrop', function () {
+        $this->app->singleton('backdrop', function() {
             return new BackdropHeadlessClient();
         });
 
         // Automatically apply the package configuration
-        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'backdrop-headless-client');
+        $this->mergeConfigFrom(__DIR__ . '/../config/config.php', 'backdrop-headless-client');
     }
 }
