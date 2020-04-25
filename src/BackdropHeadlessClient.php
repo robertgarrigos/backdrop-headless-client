@@ -2,20 +2,11 @@
 
 namespace Robertgarrigos\BackdropHeadlessClient;
 
+use Illuminate\Support\Facades\Http;
 use stdClass;
-use GuzzleHttp\Client;
-use function GuzzleHttp\json_decode;
-use GuzzleHttp\Exception\RequestException;
 
 class BackdropHeadlessClient
 {
-    protected $client;
-
-    public function __construct(Client $client = null)
-    {
-        $this->client = $client ?: new Client();
-    }
-
     /**
      * Get a view
      *
@@ -25,17 +16,17 @@ class BackdropHeadlessClient
      **/
     public function getView($view, $display_id, $args = null)
     {
-        $url = config('backdrop-headless-client.backdrop_api_server') . '/api/v2/views/' . $view . '/' . $display_id . '/' . $args;
-        try {
-            $response = $this->client->get($url);
-        } catch (RequestException $e) {
-            abort(404);
-        }
-        $view = json_decode($response->getBody()->getContents());
-        if (isset($view->code) && $view->code == 404) {
-            abort(404);
-        }
-        $view = collect($view);
+        // TODO: check for trailing slash??
+        $url = config('backdrop-headless-client.backdrop_api_server')
+            . '/api/v2/views/'
+            . $view . '/'
+            . $display_id . '/'
+            . $args;
+
+        $response = Http::get($url)->throw();
+
+
+        $view = $response->json();
 
         return $view;
     }
@@ -52,18 +43,16 @@ class BackdropHeadlessClient
             . '/api/v2/node/'
             . $type
             . '/' . $id;
-        try {
-            $response = $this->client->get($url);
-        } catch (RequestException $e) {
-            abort(404);
-        }
-        $node = json_decode($response->getBody()->getContents());
-        if (null != config('backdrop-headless-client.node_types.' . $type)) {
-            $mapped_node = $this->mapToNode($type, $node);
-        }
-        else {
-            $mapped_node = $node;
-        }
+        $response = Http::get($url)->throw();
+
+        $node = $response->json();
+
+        if (config('backdrop-headless-client.node_types.' . $type) != null) {
+                $mapped_node = $this->mapToNode($type, $node);
+            }
+            else {
+                $mapped_node = $node;
+            }
 
         return $mapped_node;
     }
@@ -80,14 +69,53 @@ class BackdropHeadlessClient
             . '/api/'
             . $vocabulary
             . '/term/' . $id;
-        $response = $this->client->get($url);
-        $term = json_decode($response->getBody()->getContents());
-        if (!$term) {
-            abort(404);
-        }
+        $response = Http::get($url)->throw();
+
+        $term = $response->json();
 
         return $term;
     }
+
+    /**
+     * Get a paragraphs item
+     *
+     * @param String $view view's machine name
+     * @param String $display_id view's display_id
+     * @param String $args any additional arguments
+     **/
+    public function getParagraph($type, $id)
+    {
+        $url = config('backdrop-headless-client.backdrop_api_server') .
+            '/api/v2/paragraphs/' .
+            $type . '/' .
+            $id;
+        $response = Http::get($url)->throw();
+
+        $paragraph = $response->json();
+
+        return $paragraph;
+    }
+
+    /**
+     * Get a block item
+     *
+     * @param String $view view's machine name
+     * @param String $display_id view's display_id
+     * @param String $args any additional arguments
+     **/
+    public function getBlock($name)
+    {
+        $url = config('backdrop-headless-client.backdrop_api_server') .
+            '/api/blocks/' .
+            $name;
+
+        $response = Http::get($url)->throw();
+
+        $block = $response->json();
+
+        return $block;
+    }
+
 
     /**
      * Map backdrop node to the configured fields
@@ -114,35 +142,10 @@ class BackdropHeadlessClient
                             $mapped_node->$field[] = data_get($node, $a2);
                         }
                     }
-
                 }
             }
         }
-
         return $mapped_node;
-    }
-
-    /**
-     * Get a paragraphs item
-     *
-     * @param String $view view's machine name
-     * @param String $display_id view's display_id
-     * @param String $args any additional arguments
-     **/
-    public function getParagraph($type, $id)
-    {
-        $url = config('backdrop-headless-client.backdrop_api_server') . '/api/v2/paragraphs/' . $type . '/' . $id;
-        try {
-            $response = $this->client->get($url);
-        } catch (RequestException $e) {
-            abort(404);
-        }
-        $paragraph = json_decode($response->getBody()->getContents());
-        if (isset($paragraph->code) && $paragraph->code == 404) {
-            abort(404);
-        }
-
-        return $paragraph;
     }
 
 }

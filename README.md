@@ -9,6 +9,10 @@
 
 This is a laravel package which allows you to pull data from a backdrop cms site, configured with the headles module. Thus you can use the backdrop site as a backend and laravel as front end.
 
+## Compatibility
+v. 1.* of this package is compatible with Laravel 5.8
+v. 2.* of this package is compatible with Laravel 7.*
+
 ## Installation
 
 You can install the package via composer:
@@ -16,7 +20,7 @@ You can install the package via composer:
 ```bash
 composer require robertgarrigos/backdrop-headless-client
 ```
-Optionally, you can use `artisan vendor publish` to publish a config file.
+Optionally, you can use `artisan vendor:publish --tag=backdrop-config` to publish a config file.
 
 You need to add a config value in your .env file for the backdrop api url as:
 
@@ -39,16 +43,16 @@ $node = Backdrop::getNode($type, $id);
 
 $term = Backdrop::getTerm($vocabulary, $id);
 
-/* Views (v2): /api/v2/views/{view_name}/{display_id}{arguments} */
+/* Views (v2): /api/v2/views/{view_name}/{display_id}/{contextual_arguments}{filter_arguments} */
 
 $view = Backdrop::getView($view, $display_id, $args);
 
-/* Paragraphs (v2): /api/v2/paragraphs/{type}/{id} */
+/* Paragraphs (v3): /api/v3/paragraphs/{id} */
 
-$paragraph = Backdrop::getParagraph($type, $id);
+$paragraph = Backdrop::getParagraph($id);
 ```
 
-Read my [blog post](https://www.garrigos.cat/blog/how-to-set-a-backdrop-cms-as-backend-and-a-laravel-as-frontend) about this package for a deeper understanding of how it works and how to use it.
+Read my [blog post](https://www.garrigos.cat/how-to-set-a-backdrop-cms-as-backend-and-a-laravel-as-frontend) about this package for a deeper understanding of how it works and how to use it.
 
 ### Changelog
 

@@ -39,6 +39,16 @@ return [
     |                'title'
     |            ],
     |        ],
+    |        'body' => [
+    |           'type' => 'single',
+    |           'properties' => [
+    |               '#node',
+    |               'body',
+    |               'und',
+    |               0,
+    |               'value'
+    |           ],
+    |        ],
     |        'date' => [
     |            'type' => 'multiple',
     |            'properties' => [
@@ -57,7 +67,7 @@ return [
     | $node object for your blade  |  JSON data from backend
     |-------------------------------------------------------
     | $node->title                ->   JSON->#node->title
-    | $node->date[]               ->   JSON->field_date->#items[]
+    | $node->body                ->   JSON->#node->body->und[0]['value']
     |     each value of date[]    ->     each ->value of the #items[] array
     |
     | Then you only have to use the object $node in your blade files to print
