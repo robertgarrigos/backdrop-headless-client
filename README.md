@@ -11,6 +11,7 @@ This is a laravel package which allows you to pull data from a backdrop cms site
 
 ## Compatibility
 v. 1.* of this package is compatible with Laravel 5.8
+
 v. 2.* of this package is compatible with Laravel 7.*
 
 ## Installation
