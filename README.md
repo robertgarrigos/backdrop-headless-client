@@ -1,7 +1,5 @@
 # Laravel 5 REST API client for a Backdrop cms site with the headless module
 
-**This package is still in a heavy development process**
-
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/robertgarrigos/backdrop-headless-client.svg?include_prereleases)](https://packagist.org/packages/robertgarrigos/backdrop-headless-client)
 [![Build Status](https://img.shields.io/travis/robertgarrigos/backdrop-headless-client/master.svg)](https://travis-ci.org/robertgarrigos/backdrop-headless-client)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/robertgarrigos/backdrop-headless-client/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/robertgarrigos/backdrop-headless-client/?branch=master)
