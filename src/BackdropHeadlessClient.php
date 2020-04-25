@@ -43,7 +43,6 @@ class BackdropHeadlessClient
             . '/api/v2/node/'
             . $type
             . '/' . $id;
-<<<<<<< HEAD
         $response = Http::get($url)->throw();
 
         $node = $response->json();
@@ -54,19 +53,6 @@ class BackdropHeadlessClient
             else {
                 $mapped_node = $node;
             }
-=======
-        try {
-            $response = $this->client->get($url);
-        } catch (RequestException $e) {
-            abort(404);
-        }
-        $node = json_decode($response->getBody()->getContents());
-        if (null != config('backdrop-headless-client.node_types.' . $type)) {
-            $mapped_node = $this->mapToNode($type, $node);
-        } else {
-            $mapped_node = $node;
-        }
->>>>>>> 255049a96841e2f4aa7c207df8cf0e2c7292f4c2
 
         return $mapped_node;
     }
