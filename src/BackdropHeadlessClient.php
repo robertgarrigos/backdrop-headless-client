@@ -49,8 +49,7 @@ class BackdropHeadlessClient
 
         if (config('backdrop-headless-client.node_types.' . $type) != null) {
                 $mapped_node = $this->mapToNode($type, $node);
-            }
-            else {
+            } else {
                 $mapped_node = $node;
             }
 
