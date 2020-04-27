@@ -47,13 +47,9 @@ class BackdropHeadlessClient
 
         $node = $response->json();
 
-        if (config('backdrop-headless-client.node_types.' . $type) != null) {
-                $mapped_node = $this->mapToNode($type, $node);
-            } else {
-                $mapped_node = $node;
-            }
+        $node = $this->getMappedNode($type, $node);
 
-        return $mapped_node;
+        return $node;
     }
 
     /**
@@ -78,15 +74,12 @@ class BackdropHeadlessClient
     /**
      * Get a paragraphs item
      *
-     * @param String $view view's machine name
-     * @param String $display_id view's display_id
-     * @param String $args any additional arguments
+     * @param Integer $id paragraphs' id
      **/
-    public function getParagraph($type, $id)
+    public function getParagraph($id)
     {
         $url = config('backdrop-headless-client.backdrop_api_server') .
-            '/api/v2/paragraphs/' .
-            $type . '/' .
+            '/api/v3/paragraphs/' .
             $id;
         $response = Http::get($url)->throw();
 
@@ -98,9 +91,7 @@ class BackdropHeadlessClient
     /**
      * Get a block item
      *
-     * @param String $view view's machine name
-     * @param String $display_id view's display_id
-     * @param String $args any additional arguments
+     * @param String $name block's machine name
      **/
     public function getBlock($name)
     {
@@ -115,6 +106,29 @@ class BackdropHeadlessClient
         return $block;
     }
 
+    /**
+     * Get an item (node or taxonomy term) given a path alias
+     *
+     * @param String $path path
+     **/
+    public function getPath($path)
+    {
+        $url = config('backdrop-headless-client.backdrop_api_server') .
+            '/api/router/' .
+            $path;
+
+        $response = Http::get($url)->throw();
+
+        $item = $response->json();
+        if (isset($item['nid'])) {
+            $toMap = new stdClass;
+            $toMap->{'#node'} = $item;
+            # item is a node and should be mapped (or not)
+            $item = $this->getMappedNode($item['type'], $toMap);
+        }
+
+        return $item;
+    }
 
     /**
      * Map backdrop node to the configured fields
@@ -145,6 +159,22 @@ class BackdropHeadlessClient
             }
         }
         return $mapped_node;
+    }
+
+    /**
+     * return a mapped node (or not)
+     *
+     *
+     * @param String $type type of node
+     * @param Object $node node to map
+     **/
+    public function getMappedNode($type, $node)
+    {
+        if (config('backdrop-headless-client.node_types.' . $type) != null) {
+            return $this->mapToNode($type, $node);
+        } else {
+            return $node;
+        }
     }
 
 }
