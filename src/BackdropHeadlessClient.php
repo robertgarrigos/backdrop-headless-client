@@ -143,18 +143,21 @@ class BackdropHeadlessClient
         $mapped_node = new stdClass();
         if (isset($node_types[$type])) {
             foreach ($node_types[$type] as $field => $value) {
-                if ($value['type'] == 'single') {
-                    $p = implode('.', $value['properties']);
-                    $mapped_node->$field = data_get($node, $p);
-                }
-                if ($value['type'] == 'multiple') {
-                    $a = data_get($node, implode('.', $value['properties']));
-                    if (is_array($a)) {
-                        foreach ($a as $k => $v) {
-                            $a2 = array_merge($value['properties'], array($k), $value['value']);
-                            $mapped_node->$field[] = data_get($node, $a2);
+                switch ($value['type']) {
+                    case 'single':
+                        $p = implode('.', $value['properties']);
+                        $mapped_node->$field = data_get($node, $p);
+                        break;
+
+                    case 'multiple':
+                        $a = data_get($node, implode('.', $value['properties']));
+                        if (is_array($a)) {
+                            foreach ($a as $k => $v) {
+                                $a2 = array_merge($value['properties'], array($k), $value['value']);
+                                $mapped_node->$field[] = data_get($node, $a2);
+                            }
                         }
-                    }
+                        break;
                 }
             }
         }
@@ -176,5 +179,4 @@ class BackdropHeadlessClient
             return $node;
         }
     }
-
 }
