@@ -51,7 +51,7 @@ $view = Backdrop::getView($view, $display_id, $args);
 $paragraph = Backdrop::getParagraph($id);
 ```
 
-Read my [blog post](https://www.garrigos.cat/blog/robert/how-to-set-a-backdrop-cms-as-backend-and-a-laravel-as-frontend) about this package for a deeper understanding of how it works and how to use it.
+Read my [blog post](https://garrigos.cat/blog/how-to-set-a-backdrop-cms-as-backend-and-a-laravel-as-frontend) about this package for a deeper understanding of how it works and how to use it.
 
 ### Changelog
 
